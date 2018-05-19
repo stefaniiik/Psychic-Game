@@ -12,12 +12,12 @@ var guessedSoFar = [];
 
 var computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
 for ( var i = 0; i < guessesLeft; i++ ){
-    guessedSoFar[i] = "_" + "<br>";
+    // guessedSoFar[i] = "_";
 }
 // When user presses a key
 document.onkeyup = function(event) {
         var userGuess = event.key
-        console.log(userGuess)
+        // console.log(userGuess)
         // User wins
          if (userGuess == computerChoice){
             wins++;
@@ -34,8 +34,7 @@ if  (userGuess === 0 ){
     document.getElementById('guessesLeft').innerHTML = "Guesses left:" + guessesLeft;
 }
 // Guesses
-while (guessedSoFar > 0) {
-alphabet.join("");
-document.getElementById('numGuesses').innerHTML = "Guesses so far" + numGuesses;
-}
+guessedSoFar.push(userGuess);
+// console.log(guessedSoFar);
+document.getElementById('guessedSoFar').innerHTML = "Guesses so far:" + "<p>" + guessedSoFar;
 }
