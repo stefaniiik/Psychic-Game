@@ -1,61 +1,37 @@
+alert("You have 9 guesses! Guess A-Z!")
+
 // Computer has 26 letters to choose from
-var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
-"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+    "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 // Variables for the text in HTML
 var wins = 0;
 var losses = 0;
 var numGuesses = 9;
 var guessesLeft = 9;
-var guessChoices = [];
-var letterToGuess = null;
-// Computer selects a random letter
-var computerGuess = computerChoices [Math.floor (Math.random() * computerChoices.length)];
+var guessedSoFar = [];
 
-var updateGuessesLeft = function () {
-// Guesses left
-document.querySelector('#guessLeft').innerHTML = "Guesses left:" + guessesLeft;
-};
-var updateLetterToGuess = function () {
-    updateLetterToGuess.letterToGuess = computerChoices [Math.random() * computerChoices.length];
-} 
-    // Guesses tried
-var updateGuesses = function(){
-    document.querySelector('#let').innerHTML = "Your Guesses so far:" + guessChoices.join(',');
-};
-// reset
-var reset = function () {
-    numGuesses = 9;
-    guessesLeft = 9;    
-    guessChoices = [];
+var computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
 
-    updateLetterToGuess();
-    updateGuessesLeft();
-    updateGuesses();
+// When user presses a key
+document.onkeyup = function(event) {
+        var userGuess = event.key
+        console.log(userGuess)
+        // User wins
+         if (userGuess == computerChoice){
+            wins++;
+            document.getElementById('wins').innerHTML = "Wins:" + wins;
 }
-
-    updateLetterToGuess ();
-    updateGuessesLeft();
-
-// Key released function
-document.onekeyup = function(event) {
+// User loses
+if  (guesses === 0 ){
+    losses++;
+    document.getElementById('losses').innerHTML = "Losses:" + losses;
+}
+// Guesses left
+ else  {
     guessesLeft--;
-    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+    document.getElementById('guessesLeft').innerHTML = "Guesses left:" + guessesLeft;
+}
+// Guesses
 
-    guessedLetters.push(userGuess);
-    updateGuessesLeft();
-    updateGuesses();
-    // if correct letter guessed - wins go up
-        if (guessesLeft > 0) {
-            if (userGuess == letterToGuess){
-                wins++;
-                document.querySelector('#wins').innerHTML = "Wins:" + wins;
-                resent();
-            }
-        }
-        // if wrong letter guessed - losses go up
-        else if (guessesLeft == 0){
-            losses++;
-            document.querySelector('#losses').innerHTML = "Losses:" + losses;
-            reset();
-        }
-        };
+document.getElementById('numGuesses').innerHTML = "Guesses so far" + numGuesses;
+}
