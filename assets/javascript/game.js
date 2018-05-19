@@ -9,11 +9,10 @@ var losses = 0;
 var numGuesses = 9;
 var guessesLeft = 9;
 var guessedSoFar = [];
+var allowedGuess = 9;
 
 var computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
-for ( var i = 0; i < guessesLeft; i++ ){
-    // guessedSoFar[i] = "_";
-}
+if (numGuesses <0){numGuesses=9;}
 // When user presses a key
 document.onkeyup = function(event) {
         var userGuess = event.key
