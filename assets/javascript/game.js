@@ -12,20 +12,44 @@ var guessedSoFar = [];
 var allowedGuess = 9;
 
 var computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
-if (numGuesses <0){numGuesses=9;}
+
+console.log(computerChoice);
+
+function reset(){
+    computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
+    console.log(computerChoice);
+    guessedSoFar = [];
+    document.getElementById('guessedSoFar').innerHTML = "Guesses so far:" + "<p>" + guessedSoFar;
+    guessesLeft = 9;
+    document.getElementById("guessesLeft").innerHTML = guessesLeft;
+
+
+}
+
 // When user presses a key
 document.onkeyup = function(event) {
+    console.log(guessedSoFar);
+    if (guessesLeft < 1){
+        losses++;
+        document.getElementById('losses').innerHTML = "Losses:" + losses;       
+        // guessesLeft=9;
+        // document.getElementById("guessesLeft").innerHTML = guessesLeft;
+       return reset();
+    }
         var userGuess = event.key
         // console.log(userGuess)
         // User wins
          if (userGuess == computerChoice){
             wins++;
             document.getElementById('wins').innerHTML = "Wins:" + wins;
+           return reset();
 }
 // User loses
-if  (userGuess === 0 ){
+if  (guessesLeft === 0 ){
+    console.log("running this code");
     losses++;
     document.getElementById('losses').innerHTML = "Losses:" + losses;
+   return reset();
 }
 // Guesses left
  else  {
